@@ -75,7 +75,9 @@ int main(int argc, const char** argv) {
             std::string nomrecette;
             *entree >> nomrecette;
 
-            // TODO
+            for(Ingredient *ingrediant : recettes[nomrecette].ingredients){
+              stock.retrait(ingrediant->nom, ingrediant->quantite());
+            }
 
         } else if(commande=="affichage") {
             stock.affichage();
