@@ -35,6 +35,7 @@ class Ingredient {
   public:
     Ingredient( int, std::string, std::string );
     Ingredient( int, std::string );
+    Ingredient( std::string );
     static bool contien(std::string &chaine, std::vector<Ingredient*>& recette);
     static int recherche(std::string &chaine, std::vector<Ingredient*>& recette);
 

@@ -33,6 +33,8 @@ public:
 
     void affichage();
 
+    bool contiens(const std::string, int);
+
     std::string dateExpiration(const Recette& recette) const;
 
     bool realisable(const Recette& recette) const;

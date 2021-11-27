@@ -37,6 +37,13 @@ Stock::Stock() {
 
 }
 
+bool Stock::contiens(const std::string element, int quant) {
+  Ingredient i(element);
+  ArbreAVL<Ingredient>::Iterateur iter = stock.rechercher(i);
+
+  return iter && stock[iter].quantite() >= quant;
+}
+
 
 std::istream& operator >> (std::istream& is, Recette& recette){
 

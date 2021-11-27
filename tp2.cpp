@@ -10,6 +10,8 @@
 #include "stock.h"
 #include "stock.cpp"
 
+const int UTILISATION_CODE_FALSE = 0;
+const int UTILISATION_CODE_TRUE = 1;
 
 int main(int argc, const char** argv) {
     std::istream* entree;
@@ -23,7 +25,6 @@ int main(int argc, const char** argv) {
         entree = &std::cin;
     }
 
-    // TODO : ajouter les structures a utiliser
     Stock stock;
     ArbreMap<std::string, Recette> recettes;
 
@@ -69,14 +70,28 @@ int main(int argc, const char** argv) {
 
         } else if(commande=="recommendation") {
 
-            // TODO
+            std::cout << "recommendation" << std::endl;
 
         } else if(commande=="utilisation") {
             std::string nomrecette;
             *entree >> nomrecette;
 
-            for(Ingredient *ingrediant : recettes[nomrecette].ingredients){
-              stock.retrait(ingrediant->nom, ingrediant->quantite());
+            if(recettes.contient(nomrecette)){
+              bool toutLesIngredient = true;
+              for(Ingredient *ingrediant : recettes[nomrecette].ingredients){
+                if(!stock.contiens(ingrediant->nom, ingrediant->quantite())){
+                  toutLesIngredient = false;
+                  std::cout << nomrecette << " : " << UTILISATION_CODE_FALSE << std::endl;
+                  break;
+                }
+              }
+              if(toutLesIngredient) {
+                for (Ingredient *ingrediant: recettes[nomrecette].ingredients)
+                  stock.retrait(ingrediant->nom, ingrediant->quantite());
+                std::cout << nomrecette << " : " << UTILISATION_CODE_TRUE << std::endl;
+              }
+            }else{
+              std::cout << nomrecette << " : " << UTILISATION_CODE_FALSE << std::endl;
             }
 
         } else if(commande=="affichage") {

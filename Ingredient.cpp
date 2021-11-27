@@ -81,3 +81,7 @@ bool Ingredient::retirer(int _quant) {
   }
 }
 
+Ingredient::Ingredient(std::string _nom) {
+  nom = _nom;
+}
+
